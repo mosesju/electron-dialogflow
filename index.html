@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "UTF-8">
+    </head>
+    <body>
+        <h1> Hello Electron!</h1>
+        <div class="history">
+
+        </div>
+        <form>
+            <div>
+                <label> Chat Text </label>
+                <input type="text" id="item" width="300">
+            </div>
+            <button type="submit"> Send </button>
+        </form>
+
+    <script>
+        const electron = require('electron');
+        const {ipcRenderer} = electron;
+        
+        const form = document.querySelector('form');
+        form.addEventListener('submit', submitForm);
+
+        function submitForm(e){
+            console.log("submitted");
+            e.preventDefault();
+            const item = document.querySelector('#item').value;
+            //console.log(ipcRenderer);
+            console.log(item);
+            ipcRenderer.send('item:add', item);
+        }
+        console.log("Hello World");
+    </script>
+    </body>
+</html>
